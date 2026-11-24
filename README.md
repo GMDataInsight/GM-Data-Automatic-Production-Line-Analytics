@@ -1,237 +1,198 @@
-# 🚀 Automatic Production Line Analytics
+# Automatic Production Line Analytics
 
-### End-to-End Manufacturing Business Intelligence Solution
+### Turning Manufacturing Data into Operational Insights
 
-This project demonstrates the development of a complete Business Intelligence solution for monitoring and analyzing automated casting production lines. 
-The solution transforms raw production, planning, and quality data into actionable business insights using SQL Server and Power BI.
+An end-to-end Business Intelligence solution for analysing automated production lines. Built with SQL Server and Power BI, it brings
+production, planning and quality data together to help manufacturing teams understand OEE, identify performance losses and make better operational decisions.
 
-The primary objective is to measure Overall Equipment Effectiveness (OEE), monitor production performance, identify operational bottlenecks, and support data-driven decision-making.
+------------------------------------------------------------------------
 
----
+## 1. The Problem
 
-# 📷 Dashboard Preview
+Production data is generated across different operational areas, but separate reports do not always provide a clear picture of overall performance.
+
+This project addresses five key business questions:
+
+-   What is the OEE of each production line?
+-   What is driving low OEE: Availability, Performance or Quality?
+-   How does actual production compare with the production plan?
+-   Are certain lines, shifts or products performing differently?
+-   Where should improvement efforts be focused?
+
+The challenge was not simply to create another dashboard. It was to connect the available data and present it in a way that helps users understand 
+production performance and identify where to investigate further.
+
+## 2. The Proposed Solution
+
+I developed a Manufacturing Business Intelligence solution that combines production, planning and quality data in a single analytical model.
+
+-   **SQL Server** organises and transforms source data.
+-   **Power Query** prepares data for analysis.
+-   **Star Schema** connects production facts with analytical
+    dimensions.
+-   **DAX** calculates manufacturing KPIs.
+-   **Power BI** presents results through interactive dashboards.
+
+The result is a unified view of production performance, from high-level OEE monitoring to detailed analysis by production line, shift and time period.
 
 ![Dashboard Preview](screenshots/dashboard_preview.PNG)
 
----
+## 3. How I Approached the Problem
 
-# 📌 Project Overview
+I followed a structured process, starting with the business problem and translating it into an analytical solution.
 
-Manufacturing companies generate thousands of production records every day. Without a structured analytical solution, it becomes difficult to monitor equipment efficiency, 
-compare planned versus actual production, identify quality losses, and support operational decision-making.
+### Step 1 -- Understand the Production Process
 
-This project delivers a complete Manufacturing Analytics solution that integrates production, planning, and quality data into a unified analytical model. 
-The solution provides interactive dashboards for monitoring production performance and Overall Equipment Effectiveness (OEE).
+I focused on the automated production process and the information needed to evaluate its performance. The analysis brought together three main data areas:
 
----
+-   Production -- actual output and production activity.
+-   Planning -- planned production and available capacity.
+-   Quality -- produced quantities and scrap.
 
-# 🎯 Business Objectives
 
-The solution was designed to answer the following business questions:
+### Step 2 -- Define the KPIs
 
-- What is the current OEE of each production line?
-- Which production lines are performing below target?
-- How does actual production compare to the production plan?
-- Which production teams achieve the highest efficiency?
-- What are the current production trends?
-- How efficiently is available production capacity being utilized?
+I used OEE as the central performance indicator and separated it into its three components:
 
----
+  --------------------------------------------------------------------------------------------------------------------------------
+  KPI                                 What it measures
+  ----------------------------------- --------------------------------------------------------------------------------------------
+  Availability                        How much of the planned production time was available for production
 
-# 🏭 Business Process
+  Performance                         How actual production compares with the theoretical production rate
 
-![Business Process](screenshots/business_process_flow.PNG)
+  Quality                             The proportion of produced units that meet quality requirements
+                                      
+  Volume Load                         How much of available capacity is planned to be used (directly connected to client calloffs)
 
----
+  OEE                                 Overall equipment effectiveness, combining the three components
+  --------------------------------------------------------------------------------------------------------------------------------
 
-# ⚙ Technology Stack
+Additional measures include production quantity, scrap and production load.
 
-| Layer | Technology |
-|--------|------------|
-| Database | SQL Server |
-| Data Preparation | SQL Views |
-| ETL | Power Query |
-| Data Modeling | Star Schema |
-| Analytics | DAX |
-| Visualization | Power BI |
-| Version Control | Git & GitHub |
 
----
+### Step 3 -- Prepare and Connect the Data
 
-# 🏗 Solution Architecture
+I organised source data using SQL views and prepared it for reporting. The data model follows a Star Schema approach, allowing production
+results to be analysed consistently by line, shift and date.
 
-![Solution Architecture](screenshots/solution_architecture.PNG)
+### Step 4 -- Build the Analytical Solution
 
----
+I developed interactive Power BI report to answer the original business questions.
 
-# 🗂 Data Model
+**OEE summary** -- provides a high-level view of manufacturing performance, including KPI cards, production line details, 
+product details, teams, tools, products performance.
 
-![Star Schema](screenshots/data_model.PNG)
+![OEE Summary](screenshots/executive_summary.PNG)
 
----
+### Step 5 -- Analyse the Results
 
-# 🔄 SQL Data Pipeline
+After developing the model and dashboards, I analysed the results to identify performance patterns and areas requiring further investigation.
+This connected the technical solution back to the original business problem: understanding not only the KPI result, but also where
+performance differences occur and what factors may be associated with them.
 
-![SQL Pipeline](screenshots/sql_data_pipeline.PNG)
+## 4. Key Findings
 
----
+-   OEE remained below the world-class benchmark across all analysed production lines.
+-   Volume Load showed a positive trend in last 4 months.
+-   Availability remains stable as there is no detailed run time tracking.
+-   Performance and Quality were the main contributors to low OEE and showed negative trends over the observed period, which started from June 2025.
+-   June 2025 is recognized as starting point of drop of Performance and Quality
+-   **Line 2** 
+		- Showed the highest production loss.
+		- Performance dropped by 19% in Jun 2025.
+		- Significant change in Team Mix at the same period.
+		- Significant difference in Quality performance between production teams. Team 1704 has 30% lower performance comaring to others
+		- There is clear correlation between Line Performance and Production volume of product P124.
+-   **Line 5**
+		- Second contributor in production loss.		 
+		- Performance drop started from Feb 2025.
+		- There is clear correlation between Line Performance and Production volume of product P202.
+		- Quality performance of product P202 has constant negative trend. There is correlation with increase of defect D9.
+-   **Line 4**
+		- Third contributor in production loss.
+		- Performance and Quality dropped since Jun 2025.
+		- Significant difference in Performance between production teams. Team 569 has 15% lower performance comaring to others.
+		- There is change in product mix at the same period. Increase of share of volume for product P27.
+		- Product P27 have increase of defect D24 in the last month.
+-   **Line 9**
+		- Fourth contributor in production loss.
+		- Constant negative trend in Performance since Mar 2025.
+		- Team mix is significantly high on this line. 	
+		
+These observations indicate possible relationships between production
+performance, product mix and workforce organisation. Further investigation is required to establish root causes; correlation alone does not prove causation.
 
-# 📊 KPI Framework
+## 5. Recommended Improvement Areas
 
-![KPI Framework](screenshots/kpi_framework.PNG)
+-   Investigate the causes of the Performance and Quality decline observed from Jun 2025.
+-   Analyse products P124,P202 and P27 to understand their impact on production performance, including tooling complexity, product design and line compatibility.
+-   Review workforce allocation and employee movement between production lines.
+-   Evaluate operator training, onboarding and polyvalence management.
+-   Consider a structured operator qualification and certification process.
+-   Use regular KPI review meetings to monitor performance and follow up improvement actions.
 
-Additional KPIs include:
+## 6. Business Value
 
-- Production Quantity
-- Scrap
-- Forecast KPI
+The solution provides a consistent analytical view of production performance and supports:
 
----
+-   Daily production monitoring.
+-   OEE and loss analysis.
+-   Comparison of actual production with the plan.
+-   Capacity and workload monitoring.
+-   Scrap and quality monitoring.
+-   Structured performance reviews.
+-   Data-supported continuous improvement.
 
-# 📈 Dashboard Pages
+The dashboards provide visibility and analytical support. Operational improvements depend on the actions taken by the business and should be measured separately.
 
-## Executive Summary
+## 7. Technology
 
-![Executive Summary](screenshots/executive_summary.PNG)
+  Area                          Technology
+  ----------------------------- -----------------------
+  Database and transformation   SQL Server, SQL Views
+  Data preparation              Power Query
+  Data modelling                Star Schema
+  KPI calculations              DAX
+  Reporting and visualisation   Power BI
+  Version control               Git, GitHub
 
-Provides an executive overview of manufacturing performance through KPI cards, trend analysis, forecasting, and production monitoring.
+## 8. Documentation
 
-**Main Features**
+Additional technical documentation is available in the `Documentation`
+folder:
 
-- KPI Cards
-- Production Trends
-- Forecast
-- Capacity Monitoring
-- Interactive Slicers
+-   Solution Architecture
+-   Business Logic and KPI Definitions
+-   SQL Documentation
+-   Data Model
+-   Power BI Documentation
+-   DAX Measures
 
----
+## 9. Future Development
 
-## OEE Analysis
+Potential next steps include Power BI Service deployment and automated refresh, near real-time reporting.
+These are potential enhancements, not features of the current implementation.
 
-![OEE Analysis](screenshots/oee_analysis.PNG)
+------------------------------------------------------------------------
 
-Detailed analysis of production efficiency across production lines, shifts, and time periods.
+## About
 
-**Main Features**
+**Miroslav Grujić -- GM Data Insight**
 
-- OEE Analysis
-- Availability
-- Performance
-- Quality
-- Monthly Trends
-- Drill-down Analysis
+Manufacturing Analytics \| Business Intelligence \| SQL Server \| Power
+BI \| Operations Analytics
 
----
+With more than 18 years of experience in automotive manufacturing and
+operations, I combine practical manufacturing knowledge with data and
+Business Intelligence capabilities to turn production data into
+actionable insights.
 
-# 🔍 Key Findings
+-   Website: [gmdatainsight.com](https://gmdatainsight.com)
+-   LinkedIn: [Miroslav
+    Grujić](https://www.linkedin.com/in/miroslav-grujic-55567578/)
 
-The analysis identified several important operational insights:
+------------------------------------------------------------------------
 
-- Overall Equipment Effectiveness (OEE) remained significantly below the world-class benchmark across all production lines.
-- Volume Load showed a positive trend throughout the observed period, while Availability remained stable.
-- Performance and Quality were identified as the primary contributors to the overall low OEE, with both KPIs showing a negative trend over time.
-- **Line 1** recorded the lowest OEE (approximately 36%). The decline began in June 2025 and coincided with reduced Performance and Quality levels. During the same period, the production mix shifted toward products **320053** and **320051**, while the number of Line Leaders and Operators also increased.
-- **Line 2** showed an overall positive OEE trend; however, a significant Performance decrease was observed between June and November 2025. This period coincided with the introduction of additional Line Leaders. After returning to the standard Line Leader configuration, Performance recovered.
-- **Line 3** experienced a noticeable Performance decline starting in June 2025. The same period also coincided with an increase in the number of Operators assigned to the production line.
-- **Lines 4 and 5** exhibited a similar performance pattern, indicating common operational challenges across multiple production lines.
+⭐ Explore other projects in the **GM Data Analytics Portfolio**.
 
-These findings indicate that organizational and production mix changes may have influenced manufacturing performance and should be investigated further to determine their operational impact.
-
----
-
-# 💡 Business Recommendations
-
-Based on the analytical findings, the following improvement opportunities have been identified:
-
-- Investigate the root causes of the Performance and Quality decline observed from June 2025 onward. Potential factors include weather conditions, employee absenteeism, and organizational changes.
-- Perform a detailed analysis of products **320051**, **320053**, and **317757** to evaluate their impact on production performance. Areas of investigation should include tooling complexity, product design, and compatibility with existing production lines.
-- Review workforce allocation and employee movement between production lines after June 2025 to determine whether frequent personnel changes affected operational stability.
-- Evaluate the effectiveness of operator training, onboarding, and polyvalence management to ensure employees are assigned according to their competency levels.
-- Consider implementing a structured operator certification process, including knowledge validation and formal qualification before independent work on a production line.
-- Analyze tool change activities across all production lines. The high product mix suggests frequent changeovers, making SMED principles and setup time reduction potential improvement opportunities.
-
-- Establish regular KPI review meetings using the developed Power BI dashboards to monitor corrective actions and measure continuous improvement initiatives.
-
----
-
-# 💼 Business Impact
-
-The implemented solution enables:
-
-- Daily production monitoring
-- OEE measurement
-- Capacity utilization analysis
-- Production planning comparison
-- Scrap monitoring
-- Executive reporting
-- Faster operational decision-making
-- Continuous improvement initiatives
-
----
-
-# ⭐ Technical Highlights
-
-- End-to-End Business Intelligence Solution
-- SQL Server Data Transformation
-- Modular SQL View Architecture
-- Star Schema Data Modeling
-- Advanced DAX Measures
-- Manufacturing KPI Framework
-- Forecast Analytics
-- Interactive Power BI Dashboards
-- Professional UI Design
-- Manufacturing Analytics Best Practices
-
----
-
-# 📂 Repository Structure
-
-![Respository Structure](screenshots/respository_architecture.PNG)
-
----
-
-# 📚 Documentation
-
-Additional project documentation is available in the **Documentation** folder.
-
-Included documentation:
-
-- Project Architecture
-- Business Logic
-- SQL Documentation
-- Data Model
-- Power BI Documentation
-- DAX Measures
-
----
-
-# 🚀 Future Improvements
-
-Possible future enhancements include:
-
-- Power BI Service Deployment
-- Automated Data Refresh
-- Near Real-Time Reporting
-- Predictive Maintenance
-- Machine-Level Drill-through
-- AI-assisted Production Forecasting
-
----
-
-# 👨‍💻 About the Author
-
-**Miroslav Grujic - GM Data Insight**
-
-Manufacturing Data Analytics | SQL Server | Power BI | Operations Analytics
-
-With 18 years of experience in the automotive industry, this project combines manufacturing expertise with modern Business Intelligence practices to deliver actionable operational insights.
-
----
-
-# 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-⭐ If you found this project interesting, feel free to explore the other projects available in my **GM Data Analytics Portfolio**.
