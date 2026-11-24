@@ -50,23 +50,17 @@ I focused on the automated production process and the information needed to eval
 -   Quality -- produced quantities and scrap.
 
 
-### Step 2 -- Define the KPIs
+### Step 2 – Define the KPIs
 
 I used OEE as the central performance indicator and separated it into its three components:
 
-  --------------------------------------------------------------------------------------------------------------------------------
-  KPI                                 What it measures
-  ----------------------------------- --------------------------------------------------------------------------------------------
-  Availability                        How much of the planned production time was available for production
-
-  Performance                         How actual production compares with the theoretical production rate
-
-  Quality                             The proportion of produced units that meet quality requirements
-                                      
-  Volume Load                         How much of available capacity is planned to be used (directly connected to client calloffs)
-
-  OEE                                 Overall equipment effectiveness, combining the three components
-  --------------------------------------------------------------------------------------------------------------------------------
+| KPI | What it measures |
+|---|---|
+| **Availability** | How much of the planned production time was available for production. |
+| **Performance** | How actual production compares with the theoretical production rate. |
+| **Quality** | The proportion of produced units that meet quality requirements. |
+| **Volume Load** | How much of available capacity is planned to be used, directly connected to client calloffs. |
+| **OEE** | Overall Equipment Effectiveness, combining Availability, Performance, and Quality. |
 
 Additional measures include production quantity, scrap and production load.
 
@@ -82,8 +76,6 @@ I developed interactive Power BI report to answer the original business question
 
 **OEE summary** -- provides a high-level view of manufacturing performance, including KPI cards, production line details, 
 product details, teams, tools, products performance.
-
-![OEE Summary](screenshots/executive_summary.PNG)
 
 ### Step 5 -- Analyse the Results
 
@@ -131,6 +123,7 @@ performance, product mix and workforce organisation. Further investigation is re
 -   Evaluate operator training, onboarding and polyvalence management.
 -   Consider a structured operator qualification and certification process.
 -   Use regular KPI review meetings to monitor performance and follow up improvement actions.
+-   Develope production time and down time data collection in order to investigate Availability in more details.
 
 ## 6. Business Value
 
@@ -148,15 +141,14 @@ The dashboards provide visibility and analytical support. Operational improvemen
 
 ## 7. Technology
 
-  Area                          Technology
-  ----------------------------- -----------------------
-  Database and transformation   SQL Server, SQL Views
-  Data preparation              Power Query
-  Data modelling                Star Schema
-  KPI calculations              DAX
-  Reporting and visualisation   Power BI
-  Version control               Git, GitHub
-
+| Area | Technology |
+|---|---|
+| Database and transformation | SQL Server, SQL Views |
+| Data preparation | Power Query |
+| Data modelling | Star Schema |
+| KPI calculations | DAX |
+| Reporting and visualisation | Power BI |
+| Version control | Git, GitHub |
 ## 8. Documentation
 
 Additional technical documentation is available in the `Documentation`
